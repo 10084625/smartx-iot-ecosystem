@@ -1,0 +1,83 @@
+﻿<Window x:Class="SmartX.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2000/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2000/xaml"
+        Title="Smart-X IoT Ingestion & Gateway Console" Height="650" Width="1000"
+        Background="#1E1E2E" Foreground="#CDD6F4" WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Bar -->
+        <Border Grid.Row="0" Background="#313244" Padding="15" CornerRadius="8" Margin="0,0,0,15">
+            <DockPanel>
+                <TextBlock Text="Smart-X IoT Gateway" FontSize="22" FontWeight="Bold" Foreground="#89B4FA" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="BtnPillar1" Content="1. Ingestion [Active]" Margin="5" Padding="10,5" Background="#A6E3A1" Foreground="#11111B" FontWeight="Bold"/>
+                    <Button Name="BtnPillar2" Content="2. Command Stream [Disabled]" Margin="5" Padding="10,5" IsEnabled="False" Background="#45475A" Foreground="#BAC2DE"/>
+                    <Button Name="BtnPillar3" Content="3. Network Topology [Disabled]" Margin="5" Padding="10,5" IsEnabled="False" Background="#45475A" Foreground="#BAC2DE"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- Main Work Area Split -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Registration & Attachment Panel -->
+            <Border Grid.Column="0" Background="#181825" Padding="15" CornerRadius="8" Margin="0,0,10,0">
+                <StackPanel>
+                    <TextBlock Text="Sensor Registration & Hardware Attachment" FontSize="16" FontWeight="Bold" Foreground="#F5E0DC" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="MAC Address:" Margin="0,5,0,2"/>
+                    <TextBox Name="TxtMac" Padding="6" Background="#313244" Foreground="#CDD6F4" BorderThickness="0"/>
+
+                    <TextBlock Text="Location (Zone / Room):" Margin="0,10,0,2"/>
+                    <TextBox Name="TxtLocation" Padding="6" Background="#313244" Foreground="#CDD6F4" BorderThickness="0"/>
+
+                    <TextBlock Text="Sensor Category:" Margin="0,10,0,2"/>
+                    <ComboBox Name="CmbCategory" Padding="6" Background="#313244" Foreground="#11111B">
+                        <ComboBoxItem Content="Environmental (Moisture/Temp)" IsSelected="True"/>
+                        <ComboBoxItem Content="Power Consumption (Wattage)"/>
+                        <ComboBoxItem Content="Actuator / Switch"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Telemetry Value (Float):" Margin="0,10,0,2"/>
+                    <TextBox Name="TxtTelemetryVal" Text="24.5" Padding="6" Background="#313244" Foreground="#CDD6F4" BorderThickness="0"/>
+
+                    <!-- OpenFileDialog Upload Button -->
+                    <Button Name="BtnAttachLog" Content="📁 Attach Hardware Log / Photo" Click="BtnAttachLog_Click" Margin="0,15,0,0" Padding="10" Background="#89B4FA" Foreground="#11111B" FontWeight="Bold"/>
+                    <TextBlock Name="TxtSelectedFile" Text="No file attached" FontSize="11" Foreground="#A6ADC8" Margin="0,5,0,0"/>
+
+                    <Button Name="BtnSubmitIngest" Content="⚡ Ingest Telemetry Packet" Click="BtnSubmitIngest_Click" Margin="0,15,0,0" Padding="12" Background="#A6E3A1" Foreground="#11111B" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Dynamic Telemetry Dashboard Engagement Strategy -->
+            <Border Grid.Column="1" Background="#181825" Padding="15" CornerRadius="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Real-Time Visual Telemetry Feedback" FontSize="16" FontWeight="Bold" Foreground="#89B4FA" Margin="0,0,0,10"/>
+
+                    <!-- Visual Heatmap Indicator Card -->
+                    <Border Name="CardVisualFeedback" Grid.Row="1" Background="#313244" Padding="20" CornerRadius="10" VerticalAlignment="Top">
+                        <StackPanel Name="StackVisualCard">
+                            <TextBlock Name="TxtDeviceTitle" Text="Device Status: Idle" FontSize="18" FontWeight="Bold" Foreground="#CDD6F4"/>
+                            <TextBlock Name="TxtDeviceVal" Text="Value: --" FontSize="32" FontWeight="Bold" Foreground="#A6E3A1" Margin="0,10,0,0"/>
+                            <TextBlock Name="TxtAlertStatus" Text="Status: Nominal Operational Parameters" FontSize="12" Foreground="#BAC2DE" Margin="0,10,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
